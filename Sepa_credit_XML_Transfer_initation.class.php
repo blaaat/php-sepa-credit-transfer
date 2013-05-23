@@ -1,7 +1,7 @@
 <?php 
 	/**
 	* Sepa_credit_XML_Transfer_initation.class.php
-	* @author Sander Backus
+	* @author Sander Backus <info@sanderback.us>
 	* @copyright Sander Backus 2013
 	* @example example.php
 	* @version 1.0
