@@ -1,4 +1,11 @@
 <?php 
+	/**
+	* Sepa_credit_XML_Transfer_initation.class.php
+	* @author Sander Backus
+	* @copyright Sander Backus 2013
+	* @example example.php
+	* @version 1.0
+	*/ 
 	class Sepa_credit_XML_Transfer_initation_Transaction
 	{
 		public $amount;
@@ -30,58 +37,61 @@
 		
 		private $_batchBooking		= null;
 		
+		/**
+		* Validates IBAN
+		*/ 
 		static function validateIBAN($str)
 		{
 			$iban_land			= array(); 
-			$iban_land['NL']	= 18; 
-			$iban_land['DE']	= 22;
-			$iban_land['BE']	= 16;
-			$iban_land['AD'] 	= 24;
-			$iban_land['BA'] 	= 20;
-			$iban_land['BG'] 	= 22;
-			$iban_land['CY'] 	= 28;
-			$iban_land['DK'] 	= 18;
-			$iban_land['EE']	= 20;
-			$iban_land['FO'] 	= 18;
-			$iban_land['FI']	= 18;
-			$iban_land['FR']	= 27;
-			$iban_land['GE']	= 22;
-			$iban_land['GI'] 	= 23;
-			$iban_land['GR']	= 27;
-			$iban_land['GL'] 	= 18;
-			$iban_land['HU'] 	= 28;
-			$iban_land['IE'] 	= 22;
-			$iban_land['IS'] 	= 26;
-			$iban_land['IL'] 	= 22;
-			$iban_land['IT'] 	= 27;
-			$iban_land['HR']	= 21;
-			$iban_land['LV'] 	= 21;
-			$iban_land['LB'] 	= 28;
-			$iban_land['Ll'] 	= 21;
-			$iban_land['LT'] 	= 20;
-			$iban_land['LU'] 	= 20;
-			$iban_land['MK'] 	= 19;
-			$iban_land['MT'] 	= 31;
-			$iban_land['MC'] 	= 27;
-			$iban_land['ME'] 	= 22;
-			$iban_land['NO'] 	= 15;
-			$iban_land['AT'] 	= 20;
-			$iban_land['PL'] 	= 28;
-			$iban_land['PT'] 	= 25;
-			$iban_land['RO'] 	= 24;
-			$iban_land['SM'] 	= 27;
-			$iban_land['SA'] 	= 24;
-			$iban_land['RS'] 	= 22;
-			$iban_land['SK'] 	= 24;
-			$iban_land['Sl'] 	= 19;
-			$iban_land['ES'] 	= 24;
-			$iban_land['CZ'] 	= 24;
-			$iban_land['TR'] 	= 26;
-			$iban_land['TN'] 	= 24;
-			$iban_land['GB'] 	= 22;
-			$iban_land['AE'] 	= 23;
-			$iban_land['SE'] 	= 24;
-			$iban_land['CH'] 	= 21;	
+			$iban_country_length['NL']	= 18; 
+			$iban_country_length['DE']	= 22;
+			$iban_country_length['BE']	= 16;
+			$iban_country_length['AD'] 	= 24;
+			$iban_country_length['BA'] 	= 20;
+			$iban_country_length['BG'] 	= 22;
+			$iban_country_length['CY'] 	= 28;
+			$iban_country_length['DK'] 	= 18;
+			$iban_country_length['EE']	= 20;
+			$iban_country_length['FO'] 	= 18;
+			$iban_country_length['FI']	= 18;
+			$iban_country_length['FR']	= 27;
+			$iban_country_length['GE']	= 22;
+			$iban_country_length['GI'] 	= 23;
+			$iban_country_length['GR']	= 27;
+			$iban_country_length['GL'] 	= 18;
+			$iban_country_length['HU'] 	= 28;
+			$iban_country_length['IE'] 	= 22;
+			$iban_country_length['IS'] 	= 26;
+			$iban_country_length['IL'] 	= 22;
+			$iban_country_length['IT'] 	= 27;
+			$iban_country_length['HR']	= 21;
+			$iban_country_length['LV'] 	= 21;
+			$iban_country_length['LB'] 	= 28;
+			$iban_country_length['Ll'] 	= 21;
+			$iban_country_length['LT'] 	= 20;
+			$iban_country_length['LU'] 	= 20;
+			$iban_country_length['MK'] 	= 19;
+			$iban_country_length['MT'] 	= 31;
+			$iban_country_length['MC'] 	= 27;
+			$iban_country_length['ME'] 	= 22;
+			$iban_country_length['NO'] 	= 15;
+			$iban_country_length['AT'] 	= 20;
+			$iban_country_length['PL'] 	= 28;
+			$iban_country_length['PT'] 	= 25;
+			$iban_country_length['RO'] 	= 24;
+			$iban_country_length['SM'] 	= 27;
+			$iban_country_length['SA'] 	= 24;
+			$iban_country_length['RS'] 	= 22;
+			$iban_country_length['SK'] 	= 24;
+			$iban_country_length['Sl'] 	= 19;
+			$iban_country_length['ES'] 	= 24;
+			$iban_country_length['CZ'] 	= 24;
+			$iban_country_length['TR'] 	= 26;
+			$iban_country_length['TN'] 	= 24;
+			$iban_country_length['GB'] 	= 22;
+			$iban_country_length['AE'] 	= 23;
+			$iban_country_length['SE'] 	= 24;
+			$iban_country_length['CH'] 	= 21;	
 				
 			$regexvalid			= preg_match("/^[A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}$/", $str);
 			if(!$regexvalid)
@@ -92,12 +102,12 @@
 			// validate country code & length
 			$country			= substr($str, 0, 2);
 			$check_digits		= substr($str, 2, 2); 
-			if(!isset($iban_land[$country]))
+			if(!isset($iban_country_length[$country]))
 			{
 				return false;
 			}
 			
-			if(strlen($str) != $iban_land[$country])
+			if(strlen($str) != $iban_country_length[$country])
 			{
 				return false;
 			}
