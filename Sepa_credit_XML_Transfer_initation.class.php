@@ -42,7 +42,7 @@
 		*/ 
 		static function validateIBAN($str)
 		{
-			$iban_land			= array(); 
+			$iban_country_length		= array(); 
 			$iban_country_length['NL']	= 18; 
 			$iban_country_length['DE']	= 22;
 			$iban_country_length['BE']	= 16;
