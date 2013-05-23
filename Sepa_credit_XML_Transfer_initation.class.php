@@ -67,7 +67,7 @@
 			$iban_country_length['HR']	= 21;
 			$iban_country_length['LV'] 	= 21;
 			$iban_country_length['LB'] 	= 28;
-			$iban_country_length['Ll'] 	= 21;
+			$iban_country_length['LI'] 	= 21;
 			$iban_country_length['LT'] 	= 20;
 			$iban_country_length['LU'] 	= 20;
 			$iban_country_length['MK'] 	= 19;
@@ -83,7 +83,7 @@
 			$iban_country_length['SA'] 	= 24;
 			$iban_country_length['RS'] 	= 22;
 			$iban_country_length['SK'] 	= 24;
-			$iban_country_length['Sl'] 	= 19;
+			$iban_country_length['SI'] 	= 19;
 			$iban_country_length['ES'] 	= 24;
 			$iban_country_length['CZ'] 	= 24;
 			$iban_country_length['TR'] 	= 26;
