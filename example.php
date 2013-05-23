@@ -24,6 +24,6 @@
 	$test->addTransaction($test_transaction3,'b');
 	
 	$test->build();
-	print($test->getXML())	
+	print($test->getXML());
 	
 	
