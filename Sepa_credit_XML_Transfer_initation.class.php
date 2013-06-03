@@ -14,8 +14,22 @@
 		public $name;
 		public $descr;
 		
-		public function __construct($name, $amount,$iban,$bic,$descr='')
+		public function __construct($name, $amount,$iban,$bic,$descr='',$decode_html_entities = true)
 		{
+			if($decode_html_entities)
+			{
+				$name 			= html_entity_decode($name,ENT_COMPAT,'UTF-8');
+				$descr			= html_entity_decode($descr,ENT_COMPAT,'UTF-8');
+			}
+			
+			// filter non-valid characters from name and description. translate special characters
+			$name				= iconv('UTF-8', 'ASCII//TRANSLIT',$name); 
+			$descr				= iconv('UTF-8', 'ASCII//TRANSLIT',$descr); 
+			
+			$allow_regex		= "/[^a-zA-Z0-9-\.\+\/\? ]+/";
+			$name				= preg_replace($allow_regex, "", $name);
+			$descr				= preg_replace($allow_regex, "", $descr);
+			
 			$this->amount		= $amount;
 			$this->bic			= $bic;
 			$this->iban			= $iban;
