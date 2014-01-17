@@ -13,6 +13,7 @@
 		public $iban;
 		public $name;
 		public $descr;
+		public $transaction_id	= null; 
 		
 		public function __construct($name, $amount,$iban,$bic,$descr='',$decode_html_entities = true)
 		{
@@ -23,8 +24,8 @@
 			}
 			
 			// filter non-valid characters from name and description. translate special characters
-			$name				= iconv('UTF-8', 'ASCII//TRANSLIT',$name); 
-			$descr				= iconv('UTF-8', 'ASCII//TRANSLIT',$descr); 
+			$name				= @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE',$name); 
+			$descr				= @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE',$descr); 
 			
 			$allow_regex		= "/[^a-zA-Z0-9-\.\+\/\? ]+/";
 			$name				= preg_replace($allow_regex, "", $name);
@@ -267,7 +268,13 @@
 				foreach($trans as $key => $t)
 				{
 					$CdtTrfTxInf			= $pmtinf->addChild('CdtTrfTxInf');
-					$CdtTrfTxInf->addChild('PmtId')->addChild('EndToEndId',$this->_transid."-".$group."-".$key);
+					$tid 					= $this->_transid."-".$group."-".$key; 
+					if($t->transaction_id)
+					{
+						$tid				.= "-".$t->transaction_id;	
+					}
+					
+					$CdtTrfTxInf->addChild('PmtId')->addChild('EndToEndId',$tid);
 					$CdtTrfTxInf->addChild('Amt')->addChild('InstdAmt',$t->amount)->addAttribute('Ccy','EUR');
 					$CdtTrfTxInf->addChild('CdtrAgt')->addChild('FinInstnId')->addChild('BIC',$t->bic);
 					
